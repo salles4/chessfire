@@ -1,0 +1,109 @@
+.kill-screen-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+}
+
+.kill-content {
+  text-align: center;
+}
+
+.impostor-text {
+  color: #ff0000;
+  font-family: 'Courier New', Courier, monospace;
+  letter-spacing: 2px;
+  margin-bottom: 40px;
+  animation: dropIn 0.3s ease-out forwards;
+}
+
+/* Sprite Animation Scene */
+.battle-scene {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+  font-size: 80px;
+  position: relative;
+  height: 150px;
+}
+
+.sprite {
+  position: relative;
+  line-height: 1;
+}
+
+/* Attacker rushes in and attacks */
+.attacker-sprite {
+  animation: rushAttack 2.5s ease-in-out forwards;
+}
+
+/* Victim takes the hit */
+.victim-sprite {
+  animation: getHit 2.5s ease-in-out forwards;
+}
+
+/* The Weapon */
+.knife {
+  position: absolute;
+  font-size: 40px;
+  top: 20px;
+  right: -30px;
+  opacity: 0;
+  transform: rotate(45deg);
+  animation: stab 2.5s ease-in-out forwards;
+}
+
+/* The Aftermath */
+.ghost {
+  position: absolute;
+  font-size: 50px;
+  top: 0;
+  left: 10px;
+  opacity: 0;
+  animation: floatAway 2.5s ease-in-out forwards;
+}
+
+/* --- Keyframe Choreography --- */
+
+@keyframes dropIn {
+  0% { transform: translateY(-50px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes rushAttack {
+  0% { transform: translateX(-100px); opacity: 0; }
+  20% { transform: translateX(-50px); opacity: 1; } /* Approach */
+  40% { transform: translateX(20px); } /* Lunge! */
+  80% { transform: translateX(20px); opacity: 1; } /* Hold pose */
+  100% { transform: translateX(20px); opacity: 0; } /* Fade out */
+}
+
+@keyframes stab {
+  0%, 35% { opacity: 0; transform: translate(-20px, -20px) rotate(45deg); }
+  40% { opacity: 1; transform: translate(0, 0) rotate(90deg); } /* Connect */
+  60% { opacity: 1; transform: translate(0, 0) rotate(90deg); }
+  100% { opacity: 0; transform: translate(0, 0) rotate(90deg); }
+}
+
+@keyframes getHit {
+  0%, 35% { transform: translateX(0) rotate(0); opacity: 1; color: inherit; filter: none; }
+  40% { transform: translateX(10px) rotate(15deg) scale(0.9); color: red; filter: grayscale(100%); } /* Impact */
+  45% { transform: translateX(20px) rotate(90deg); opacity: 1; } /* Fall over */
+  80% { transform: translateX(20px) rotate(90deg); opacity: 1; }
+  100% { transform: translateX(20px) rotate(90deg); opacity: 0; }
+}
+
+@keyframes floatAway {
+  0%, 45% { opacity: 0; transform: translateY(0); }
+  55% { opacity: 1; transform: translateY(-20px); }
+  100% { opacity: 0; transform: translateY(-100px); }
+}
